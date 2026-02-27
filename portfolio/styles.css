@@ -565,6 +565,122 @@ footer {
   color: rgba(255, 255, 255, 0.3) !important;
 }
 
+/* Projects Section */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+.project-card {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.project-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.2),
+    rgba(14, 165, 233, 0.2)
+  );
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.project-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+.project-card .date {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-family: monospace;
+  margin-bottom: 1rem;
+  display: block;
+}
+.project-card p {
+  color: var(--text-muted);
+  flex-grow: 1;
+  font-size: 0.95rem;
+}
+
+/* Certifications Section */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+.cert-card {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  gap: 1.5rem;
+}
+.cert-icon {
+  font-size: 2.5rem;
+  color: var(--secondary);
+  background: rgba(236, 72, 153, 0.1);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  flex-shrink: 0;
+}
+.cert-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+.cert-info .issuer {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.cert-info p {
+  font-size: 0.9rem;
+  color: var(--primary);
+  margin-bottom: 0;
+}
+
+/* Extended Education / Volunteering */
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2rem;
+}
+.edu-grid .edu-card {
+  padding: 2rem;
+  max-width: 100%;
+  align-items: flex-start;
+}
+.edu-grid .edu-icon {
+  width: 60px;
+  height: 60px;
+  font-size: 1.8rem;
+}
+.edu-details .date {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-family: monospace;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 /* Reveal Animations */
 .reveal {
   opacity: 0;
