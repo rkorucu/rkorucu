@@ -141,13 +141,23 @@ h6 {
   align-items: center;
 }
 
-.logo {
-  color: var(--text-main);
+.logo-link {
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 900;
-  letter-spacing: -1px;
+}
+
+.logo-img {
+  height: 50px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 15px var(--primary-glow);
+  transition: var(--transition-smooth);
+}
+
+.logo-link:hover .logo-img {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--primary-glow);
 }
 
 .nav-links {
