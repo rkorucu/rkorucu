@@ -94,39 +94,30 @@
 
       <!-- ━━━━━━━━━━ ABOUT SECTION ━━━━━━━━━━ -->
       <section id="about" class="about section">
-        <h2 class="section-title reveal">About</h2>
+        <h2 class="section-title reveal">About Me</h2>
         <div class="about-content reveal">
           <div class="about-text glass-card">
             <p>
-              I'm a systems engineer focused on
-              <strong>AI orchestration</strong>,
-              <strong>distributed backend architecture</strong>, and
-              <strong>reliability engineering</strong>. My work centers on
-              building platforms where multiple services, agents, and data
-              pipelines coordinate under well-defined contracts — with every
-              state transition validated, every failure mode anticipated, and
-              every output grounded in structured logic.
+              Software Engineer focused on building production-grade AI systems
+              and reliable, cloud-native applications, with a strong interest in
+              backend and distributed system design. I enjoy jumping into
+              unfamiliar systems, understanding how they work end-to-end, and
+              turning complexity into practical, user-focused solutions.
             </p>
             <p>
-              I approach complexity by decomposing systems into independently
-              testable components with clear ownership boundaries. Whether it's
-              a multi-agent decision pipeline, a microservice mesh, or a
-              cross-system data integration — I design for
-              <strong>explicit state management</strong>,
-              <strong>schema-validated communication</strong>, and
-              <strong>controlled iteration loops</strong> that prevent drift
-              between what a system intends and what it actually does.
+              My experience includes building agentic AI workflows, modernizing
+              platforms into microservice architectures, and owning features
+              from design through production. I work across the stack—backend
+              services, APIs, frontend applications, and infrastructure—while
+              paying close attention to reliability, performance, and security.
             </p>
             <p>
-              My engineering philosophy prioritizes
-              <strong>observability over assumption</strong>,
-              <strong
-                >deterministic tooling over unconstrained generation</strong
-              >, and
-              <strong>graceful degradation over brittle optimism</strong>. I
-              build systems that can explain their own decisions, trace their
-              own execution paths, and fail safely when conditions exceed their
-              operating envelope.
+              I'm particularly interested in AI platforms, developer tooling,
+              and automation that improve how teams build and operate software.
+              I value clear communication, thoughtful tradeoffs, and writing
+              maintainable code that scales with both product and team growth.
+              Outside of work, I stay active, explore new places, and follow
+              market trends to sharpen long-term thinking and decision-making.
             </p>
             <div class="contact-info">
               <p><i class="fas fa-map-marker-alt"></i> United States</p>
@@ -287,9 +278,9 @@
             <div>
               <h3>Agentic Claim Decision Engine</h3>
               <p class="project-one-liner">
-                An AI-powered insurance claim decision platform using a hybrid
-                deterministic + generative architecture for enterprise-grade
-                decision automation.
+                AI-powered insurance claim analysis system that combines
+                deterministic fraud/coverage checks with optional LLM
+                explanation and self-checking.
               </p>
               <a
                 href="https://github.com/rkorucu/AGENTIC-CLAIM-DECISION-ENGINE"
@@ -303,145 +294,43 @@
           <div class="project-section">
             <h4>Problem</h4>
             <p>
-              Insurance claim adjudication typically relies on either fully
-              manual review (slow, inconsistent) or rigid rule engines (brittle,
-              unable to explain decisions). The industry needs a system that
-              combines deterministic fraud/coverage analysis with optional
-              LLM-powered explanation and self-checking — while remaining fully
-              operational without any AI dependency.
+              Insurance claim review is either fully manual (slow, inconsistent)
+              or based on rigid rule engines that can't explain their decisions.
+              This system automates claim adjudication using structured tools
+              for fraud detection and coverage validation, with an optional LLM
+              layer that generates human-readable explanations and self-checks
+              for consistency.
             </p>
           </div>
 
           <div class="project-section">
-            <h4>Architecture</h4>
-            <p>Three-service architecture orchestrated via Docker Compose:</p>
+            <h4>How It Works</h4>
             <ul>
               <li>
-                <strong>Spring Boot API Gateway</strong> (:8080) — Receives
-                claim requests from the frontend, validates input structure, and
-                proxies analysis to the agent service. Handles CORS, health
-                checks, and response mapping.
+                User submits a claim via the React dashboard. Spring Boot
+                gateway validates the payload and forwards it to the FastAPI
+                agent service.
               </li>
               <li>
-                <strong>FastAPI Agent Service</strong> (:8000) — Executes the
-                agentic workflow: deterministic tool pipeline → optional LLM
-                explanation → optional reflection loop. Stateless by design —
-                each request carries its own full context.
+                <code>coverage_check</code> validates policy constraints —
+                active status, coverage type, deductible, and claim limits.
               </li>
               <li>
-                <strong>React Dashboard</strong> (:5173) — Single-page interface
-                with claim submission form, decision card, flags table, and
-                reflection panel. Renders structured JSON responses into
-                human-readable decision reports.
-              </li>
-            </ul>
-          </div>
-
-          <div class="project-section">
-            <h4>How It Works — Execution Lifecycle</h4>
-            <ol class="execution-steps">
-              <li>
-                <strong>Claim Ingestion</strong> — User submits a claim via the
-                React dashboard or API. The Spring Boot gateway validates the
-                payload schema and forwards to the agent service.
+                <code>fraud_signal_scoring</code> scores fraud indicators —
+                prior claims count, missing police reports, attachment gaps.
               </li>
               <li>
-                <strong>Deterministic Tool Pipeline</strong> — Three structured
-                tools execute sequentially:
-                <code>coverage_check</code> (validates policy constraints),
-                <code>fraud_signal_scoring</code> (scores fraud indicators), and
-                <code>risk_score_aggregation</code> (combines signals into a
-                composite risk score with decision thresholds).
+                <code>risk_score_aggregation</code> combines signals into a
+                composite risk score and maps it to APPROVE / REVIEW / REJECT.
               </li>
               <li>
-                <strong>Draft Decision</strong> — Based on aggregated risk score
-                and flag analysis, a deterministic decision is produced:
-                APPROVE, REVIEW, or REJECT — with full traceability of which
-                flags triggered which thresholds.
+                If an OpenAI key is configured, an LLM generates a
+                plain-language explanation and a reflection step checks for
+                contradictions between the score, decision, and explanation.
               </li>
               <li>
-                <strong>LLM Explanation</strong> (optional) — If an OpenAI API
-                key is configured, the decision context is sent to GPT for a
-                human-readable explanation paragraph. The LLM receives only
-                structured decision data — never raw claim text.
-              </li>
-              <li>
-                <strong>Reflection Loop</strong> (optional) — A second LLM call
-                self-checks consistency: Does the decision match the score? Does
-                the risk level align with thresholds? Is the explanation
-                coherent and non-contradictory? Adjustments or reflection notes
-                are appended.
-              </li>
-              <li>
-                <strong>Response</strong> — The complete ClaimDecision
-                (decision, riskScore, riskLevel, flags, explanation,
-                reflectionNotes) is returned as validated JSON.
-              </li>
-            </ol>
-          </div>
-
-          <div class="project-section">
-            <h4>AI / Tool Integration</h4>
-            <ul>
-              <li>
-                <strong>Agent Roles</strong> — The agent service acts as a
-                single orchestrator with a fixed tool pipeline. No autonomous
-                tool selection — tool execution order is deterministic and
-                pre-defined.
-              </li>
-              <li>
-                <strong>Reflection Loop</strong> — Self-checking step validates
-                internal consistency between score, decision, risk level, and
-                explanation. Contradictions trigger field adjustments and
-                reflection notes.
-              </li>
-              <li>
-                <strong>Deterministic Tool Grounding</strong> — All fraud
-                scoring, coverage checking, and risk aggregation use structured,
-                testable Python functions — not LLM-generated logic. The LLM is
-                constrained to explanation and reflection only.
-              </li>
-              <li>
-                <strong>JSON Validation</strong> — Input claims are validated
-                against Pydantic schemas. Output decisions are type-validated
-                before response serialization.
-              </li>
-              <li>
-                <strong>State Handling</strong> — Stateless request processing.
-                Each claim carries its own complete context. No session state,
-                no cross-request dependencies.
-              </li>
-              <li>
-                <strong>Safety Constraints</strong> — Graceful fallback mode:
-                when no OpenAI key is configured, steps 2 and 3 are skipped
-                entirely. The system returns a fully valid deterministic-only
-                decision with a clear fallback indicator.
-              </li>
-            </ul>
-          </div>
-
-          <div class="project-section">
-            <h4>Reliability Measures</h4>
-            <ul>
-              <li>
-                <strong>Schema Validation</strong> — Pydantic models enforce
-                strict input/output contracts. Invalid payloads are rejected
-                before entering the pipeline.
-              </li>
-              <li>
-                <strong>Guardrails</strong> — LLM outputs are post-processed and
-                validated against expected structure. The system never surfaces
-                raw LLM text — only structured, validated fields.
-              </li>
-              <li>
-                <strong>Controlled Iteration</strong> — The reflection loop runs
-                exactly once. No recursive self-correction chains that could
-                amplify errors or hallucinate fixes.
-              </li>
-              <li>
-                <strong>Observability</strong> — Health check endpoints on both
-                services. Structured logging across the tool pipeline. Decision
-                audit trail embedded in every response.
+                Without an API key, the system returns a fully valid
+                deterministic-only decision — no AI dependency required.
               </li>
             </ul>
           </div>
@@ -450,9 +339,9 @@
             <h4>Tech Stack</h4>
             <div class="skill-tags">
               <span>Java 21</span><span>Spring Boot</span><span>Python</span
-              ><span>FastAPI</span> <span>OpenAI API</span><span>Pydantic</span
-              ><span>React</span><span>Vite</span> <span>Docker Compose</span
-              ><span>REST APIs</span>
+              ><span>FastAPI</span> <span>Pydantic</span><span>OpenAI API</span
+              ><span>React</span><span>Vite</span>
+              <span>Docker Compose</span>
             </div>
           </div>
 
@@ -465,26 +354,22 @@
               </div>
               <div class="screenshot-placeholder">
                 <i class="fas fa-image"></i>
-                <span>Agent Timeline — Tool Execution & Reflection</span>
-              </div>
-              <div class="screenshot-placeholder">
-                <i class="fas fa-image"></i>
                 <span>System Architecture Diagram</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Project 2: SkillBridge AI Expert Matching -->
+        <!-- Project 2: SkillBridge -->
         <div class="project-detail glass-card reveal">
           <div class="project-detail-header">
             <div class="project-icon"><i class="fas fa-brain"></i></div>
             <div>
-              <h3>SkillBridge — AI-Powered Expert Matching Platform</h3>
+              <h3>SkillBridge — AI Expert Matching Platform</h3>
               <p class="project-one-liner">
-                An AI-driven expert marketplace using semantic embeddings,
-                LLM-powered matching, and automated session intelligence to
-                connect clients with specialized professionals.
+                An expert marketplace that uses semantic embeddings and
+                LLM-powered matching to connect clients with tutors,
+                consultants, and coaches.
               </p>
               <a
                 href="https://github.com/rkorucu"
@@ -498,128 +383,38 @@
           <div class="project-section">
             <h4>Problem</h4>
             <p>
-              Traditional expert marketplaces rely on keyword-based search and
-              manual filtering, which fails to capture the nuance of expertise
-              matching. A client describing "I need help optimizing database
-              queries for a multi-tenant SaaS application" won't match an expert
-              tagged with "SQL" and "PostgreSQL" — even though the expertise is
-              directly relevant. The system needs semantic understanding, not
-              keyword lookup.
+              Traditional expert marketplaces rely on keyword search and manual
+              filtering. A client looking for "help optimizing database queries
+              for a multi-tenant SaaS app" won't match an expert tagged "SQL"
+              and "PostgreSQL" — even though the expertise fits. This platform
+              uses semantic understanding to match based on actual expertise
+              context, not just keywords.
             </p>
           </div>
 
           <div class="project-section">
-            <h4>Architecture</h4>
-            <p>Full-stack application with AI-powered matching layer:</p>
+            <h4>How It Works</h4>
             <ul>
               <li>
-                <strong>Kotlin + Spring Boot Backend</strong> — RESTful API
-                layer handling user management, session orchestration, and
-                expert profile management. Clean domain separation between
-                matching logic, user state, and session lifecycle.
+                Expert profiles are ingested with structured metadata (skills,
+                domains, experience level) and converted into vector embeddings.
               </li>
               <li>
-                <strong>AI Matching Engine</strong> — Semantic embedding
-                pipeline that converts both client requests and expert profiles
-                into vector representations, enabling similarity-based matching
-                that understands context beyond keywords.
+                Client requests are processed through an LLM to extract intent
+                and required expertise, producing a structured matching query.
               </li>
               <li>
-                <strong>React + TypeScript Frontend</strong> — Type-safe client
-                with component-driven architecture. Expert discovery, session
-                booking, and AI-generated session summaries rendered through a
-                responsive, accessible interface.
+                Embedding similarity scores rank experts by relevance —
+                capturing contextual alignment beyond keyword overlap.
               </li>
               <li>
-                <strong>PostgreSQL Data Layer</strong> — Relational data model
-                supporting multi-dimensional expert profiles, session history,
-                and matching metadata with query-optimized indexing.
-              </li>
-            </ul>
-          </div>
-
-          <div class="project-section">
-            <h4>How It Works — Execution Lifecycle</h4>
-            <ol class="execution-steps">
-              <li>
-                <strong>Profile Ingestion</strong> — Expert profiles are
-                ingested with structured metadata (skills, domains, experience
-                level) and converted into semantic embeddings for the matching
-                index.
+                Matched pairs enter a session lifecycle: scheduling, active
+                session, and post-session AI-generated summaries with key
+                takeaways and action items.
               </li>
               <li>
-                <strong>Client Request Analysis</strong> — Client queries are
-                processed through the LLM to extract intent, required expertise
-                dimensions, and context — producing a structured matching
-                request.
-              </li>
-              <li>
-                <strong>Semantic Matching</strong> — The matching engine
-                computes similarity scores between the client's request
-                embedding and the expert profile embeddings, ranking candidates
-                by relevance.
-              </li>
-              <li>
-                <strong>Session Orchestration</strong> — Matched expert-client
-                pairs enter a session lifecycle: scheduling, active session, and
-                post-session processing.
-              </li>
-              <li>
-                <strong>Automated Session Intelligence</strong> — Post-session,
-                the system generates structured summaries capturing key
-                discussion points, action items, and follow-up recommendations.
-              </li>
-            </ol>
-          </div>
-
-          <div class="project-section">
-            <h4>AI / Tool Integration</h4>
-            <ul>
-              <li>
-                <strong>Semantic Embeddings</strong> — Expert profiles and
-                client requests are converted into dense vector representations,
-                enabling similarity matching that captures contextual expertise
-                alignment.
-              </li>
-              <li>
-                <strong>LLM-Powered Matching</strong> — Large language models
-                extract structured intent from free-text client queries,
-                bridging the gap between natural language requests and
-                structured expert metadata.
-              </li>
-              <li>
-                <strong>Automated Summaries</strong> — Post-session AI generates
-                structured summaries with key takeaways, action items, and
-                follow-up recommendations — reducing manual note-taking
-                overhead.
-              </li>
-              <li>
-                <strong>Validation</strong> — Matching results are scored and
-                ranked, with confidence thresholds ensuring minimum quality
-                before surfacing matches to clients.
-              </li>
-            </ul>
-          </div>
-
-          <div class="project-section">
-            <h4>Reliability Measures</h4>
-            <ul>
-              <li>
-                <strong>Type-Safe Contracts</strong> — Kotlin's type system and
-                TypeScript's static analysis enforce contract integrity across
-                the full stack.
-              </li>
-              <li>
-                <strong>Data Integrity</strong> — PostgreSQL constraints,
-                migrations, and transactional session management ensure
-                consistent state across matching, booking, and session
-                lifecycle.
-              </li>
-              <li>
-                <strong>Graceful Degradation</strong> — Matching fallback to
-                keyword-based search when embedding services are unavailable.
-                Session summaries degrade to manual templates when AI services
-                are down.
+                Falls back to keyword-based search when embedding services are
+                unavailable.
               </li>
             </ul>
           </div>
@@ -630,7 +425,7 @@
               <span>Kotlin</span><span>Spring Boot</span><span>React</span
               ><span>TypeScript</span> <span>PostgreSQL</span
               ><span>OpenAI API</span><span>Semantic Embeddings</span>
-              <span>Docker</span><span>REST APIs</span>
+              <span>Docker</span>
             </div>
           </div>
 
@@ -639,11 +434,103 @@
             <div class="screenshot-placeholders">
               <div class="screenshot-placeholder">
                 <i class="fas fa-image"></i>
-                <span>Expert Discovery — Semantic Matching Results</span>
+                <span>Expert Discovery — Matching Results</span>
               </div>
               <div class="screenshot-placeholder">
                 <i class="fas fa-image"></i>
-                <span>Session Dashboard — Booking & Summary View</span>
+                <span>Session Dashboard — Booking & Summary</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Aegis Orchestrator -->
+        <div class="project-detail glass-card reveal">
+          <div class="project-detail-header">
+            <div class="project-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <div>
+              <h3>Aegis Orchestrator — Multi-Agent AI Platform</h3>
+              <p class="project-one-liner">
+                A graph-based multi-agent orchestration platform where
+                specialized AI agents collaborate through a structured execution
+                graph with validated outputs and bounded reflection.
+              </p>
+              <a
+                href="https://github.com/rkorucu/aegis-multi-agent"
+                target="_blank"
+                class="project-link"
+                ><i class="fab fa-github"></i> View Repository</a
+              >
+            </div>
+          </div>
+
+          <div class="project-section">
+            <h4>Problem</h4>
+            <p>
+              Single-call LLM applications can't handle tasks that need
+              multi-perspective analysis, structured outputs, and
+              self-correction. Aegis decomposes complex queries into a directed
+              graph of agents — Planner, Research, Risk, Critic, Synthesizer —
+              each with a defined role, validated output schema, and access to
+              deterministic tools.
+            </p>
+          </div>
+
+          <div class="project-section">
+            <h4>How It Works</h4>
+            <ul>
+              <li>
+                <strong>Planner</strong> breaks the user query into a structured
+                execution plan with numbered steps.
+              </li>
+              <li>
+                <strong>Research</strong> gathers data using deterministic tools
+                (market analysis, financial projections, risk scoring) and LLM
+                reasoning.
+              </li>
+              <li>
+                <strong>Risk</strong> evaluates potential risks, assigns
+                severity levels, and proposes mitigations.
+              </li>
+              <li>
+                <strong>Critic</strong> reviews all outputs for quality and
+                consistency — emits APPROVE or REVISE. Reflection is hard-capped
+                at 2 loops.
+              </li>
+              <li>
+                <strong>Synthesizer</strong> produces the final structured
+                response with key points, recommendation, and confidence level.
+              </li>
+              <li>
+                All agents share a single typed state object. Every output is
+                JSON-schema validated before entering state. SSE streaming shows
+                real-time execution progress on the frontend.
+              </li>
+            </ul>
+          </div>
+
+          <div class="project-section">
+            <h4>Tech Stack</h4>
+            <div class="skill-tags">
+              <span>Java 21</span><span>Spring Boot 3</span
+              ><span>LangGraph4j</span><span>LangChain4j</span>
+              <span>React 19</span><span>Vite</span><span>SSE Streaming</span>
+              <span>Docker Compose</span><span>Ollama / OpenAI</span>
+            </div>
+          </div>
+
+          <div class="project-section screenshots-section">
+            <h4>Screenshots</h4>
+            <div class="screenshot-placeholders">
+              <div class="screenshot-placeholder">
+                <i class="fas fa-image"></i>
+                <span>Agent Timeline — Real-Time Execution View</span>
+              </div>
+              <div class="screenshot-placeholder">
+                <i class="fas fa-image"></i>
+                <span>Analysis Result — Structured Output</span>
               </div>
               <div class="screenshot-placeholder">
                 <i class="fas fa-image"></i>
@@ -652,7 +539,9 @@
             </div>
           </div>
         </div>
+
       </section>
+
 
       <!-- ━━━━━━━━━━ SKILLS SECTION ━━━━━━━━━━ -->
       <section id="skills" class="skills section">
