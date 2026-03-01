@@ -1,14 +1,15 @@
 <h1 align="center">Hi 👋, there</h1>
 
-
-Hi, 
+Hi
 Software Engineer focused on building production-grade AI systems and reliable, cloud-native applications, with a strong interest in backend and distributed system design. I enjoy jumping into unfamiliar systems, understanding how they work end-to-end, and turning complexity into practical, user-focused solutions.
 
 My experience includes building agentic AI workflows, modernizing platforms into microservice architectures, and owning features from design through production. I work across the stack—backend services, APIs, frontend applications, and infrastructure—while paying close attention to reliability, performance, and security.
 
-I’m particularly interested in AI platforms, developer tooling, and automation that improve how teams build and operate software. I value clear communication, thoughtful tradeoffs, and writing maintainable code that scales with both product and team growth. Outside of work, I stay active, explore new places, and follow market trends to sharpen long-term thinking and decision-making.
+I'm particularly interested in AI platforms, developer tooling, and automation that improve how teams build and operate software. I value clear communication, thoughtful tradeoffs, and writing maintainable code that scales with both product and team growth.
 
-<h3 align="left"> Let’s connect!</h3>
+Outside of work, I stay active, explore new places, and follow market trends to sharpen long-term thinking and decision-making.
+
+<h3 align="left"> Let's connect!</h3>
 <p align="left">
 <a href="https://www.linkedin.com/in/rmznkrc/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/rmznkrc/" height="30" width="40" /></a>
 </p>
